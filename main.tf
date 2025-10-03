@@ -6,7 +6,7 @@ data "aws_availability_zones" "available" {}
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "2.77.0"
+  version = "6.4.0"
 
   name                 = "education"
   cidr                 = "10.0.0.0/16"
@@ -60,7 +60,7 @@ resource "aws_db_parameter_group" "education" {
 
 resource "aws_db_instance" "education" {
   identifier             = "education"
-  instance_class         = "db.t3.micro"
+  instance_class         = "db.t2.micro"
   allocated_storage      = 5
   engine                 = "postgres"
   engine_version         = "14.1"
