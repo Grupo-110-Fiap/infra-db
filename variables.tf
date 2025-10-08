@@ -22,14 +22,13 @@ variable "availability_zones" {
   default     = ["us-east-1a", "us-east-1b"]
 }
 
+variable "terraform_state_bucket" {
+  description = "S3 bucket for Terraform state"
+  type        = string
+}
+
 variable "db_password" {
   description = "Password for the RDS PostgreSQL instance"
   type        = string
   sensitive   = true
-}
-
-variable "lambda_s3_key" {
-  description = "S3 key for Lambda function deployment package"
-  type        = string
-  default     = ""
 }
