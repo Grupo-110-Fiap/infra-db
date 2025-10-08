@@ -106,7 +106,7 @@ resource "aws_db_instance" "postgres-v2" {
 
   db_name  = "gestor_pedidos_db"
   username = "fiap_arch"
-  password = "fiap_arch"
+  password = var.db_password
 
   db_subnet_group_name   = aws_db_subnet_group.main.name
   vpc_security_group_ids = [aws_security_group.rds.id]
