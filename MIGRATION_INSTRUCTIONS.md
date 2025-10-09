@@ -12,6 +12,7 @@ terraform plan
 terraform apply
 ```
 
+
 **O que cria:**
 - VPC dedicada para o banco (10.1.0.0/16)
 - Subnets públicas em múltiplas AZs
