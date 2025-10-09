@@ -28,6 +28,7 @@ if [ "$KUBERNETES_FOUND" = true ]; then
     exit 1
 fi
 
+
 echo "✅ Configuration files look clean (no Kubernetes references)"
 
 # Initialize terraform with upgrade to fix provider version issues
