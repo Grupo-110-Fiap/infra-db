@@ -1,17 +1,35 @@
 # Ordem de Execução - Projetos separados
 
+## 🚨 **ESTADO ATUAL - REQUER LIMPEZA**
+
+### ⚠️  **Problema Identificado:**
+O estado do Terraform contém recursos misturados de ambos os projetos. É necessário limpar antes de prosseguir.
+
+### 🔧 **Solução Imediata:**
+
+#### Opção 1: Script Automatizado
+```bash
+cd /Users/guilherme.munhoz/Workspace/Fiap/infra-db
+chmod +x cleanup_state.sh
+./cleanup_state.sh
+```
+
+#### Opção 2: Limpeza Manual
+```bash
+# Ver TROUBLESHOOTING.md para instruções detalhadas
+```
+
 ## ✅ Nova arquitetura (Database-First)
 
-### 📋 Ordem CORRETA de execução:
+### 📋 Ordem CORRETA de execução (APÓS limpeza):
 
 #### 1️⃣ **Primeiro: infra-db**
 ```bash
 cd /Users/guilherme.munhoz/Workspace/Fiap/infra-db
-terraform init
+terraform init -reconfigure  # Use -reconfigure após limpeza
 terraform plan
 terraform apply
 ```
-
 
 **O que cria:**
 - VPC dedicada para o banco (10.1.0.0/16)
