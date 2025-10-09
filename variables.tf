@@ -25,7 +25,7 @@ variable "availability_zones" {
 variable "terraform_state_bucket" {
   description = "S3 bucket for Terraform state"
   type        = string
-  default = "terraform-kajgfkafvbajbfkagfskahgdfiahfkds"
+  default = "terraform-kajgfkafvbajbfkagfskahgdfiahfkds-DB-RDS"
 }
 
 variable "db_password" {
