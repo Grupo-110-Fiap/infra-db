@@ -5,9 +5,9 @@ variable "aws_region" {
 }
 
 variable "cluster_name" {
-  description = "EKS cluster name"
+  description = "Project name prefix for resources"
   type        = string
-  default     = "techchallenge-eks"
+  default     = "techchallenge"
 }
 
 variable "vpc_cidr" {
@@ -25,11 +25,17 @@ variable "availability_zones" {
 variable "terraform_state_bucket" {
   description = "S3 bucket for Terraform state"
   type        = string
-  default = "terraform-kajgfkafvbajbfkagfskahgdfiahfkds-DB-RDS"
+  default = "terraform-rds-state-bucket"
 }
 
 variable "db_password" {
   description = "Password for the RDS PostgreSQL instance"
   type        = string
   sensitive   = true
+}
+
+variable "allowed_cidr_blocks" {
+  description = "CIDR blocks allowed to access RDS instance"
+  type        = list(string)
+  default     = []  # Empty by default for security - populate as needed
 }

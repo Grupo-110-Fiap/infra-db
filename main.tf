@@ -72,12 +72,25 @@ resource "aws_security_group" "rds" {
   description = "Security group for RDS PostgreSQL"
   vpc_id      = aws_vpc.db_vpc.id
 
+  # Allow access from within the DB VPC
   ingress {
     from_port       = 5432
     to_port         = 5432
     protocol        = "tcp"
-    cidr_blocks     = ["10.0.0.0/16"]  # CIDR do EKS (será criado depois)
-    description     = "PostgreSQL access from EKS VPC"
+    cidr_blocks     = [var.vpc_cidr]
+    description     = "PostgreSQL access from DB VPC"
+  }
+
+  # Allow access from additional CIDR blocks if specified
+  dynamic "ingress" {
+    for_each = var.allowed_cidr_blocks
+    content {
+      from_port   = 5432
+      to_port     = 5432
+      protocol    = "tcp"
+      cidr_blocks = [ingress.value]
+      description = "PostgreSQL access from external CIDR: ${ingress.value}"
+    }
   }
 
   egress {
