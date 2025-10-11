@@ -81,6 +81,15 @@ resource "aws_security_group" "rds" {
     description     = "PostgreSQL access from DB VPC"
   }
 
+  # Allow public access to PostgreSQL
+  ingress {
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "PostgreSQL public access"
+  }
+
   # Allow access from additional CIDR blocks if specified
   dynamic "ingress" {
     for_each = var.allowed_cidr_blocks
