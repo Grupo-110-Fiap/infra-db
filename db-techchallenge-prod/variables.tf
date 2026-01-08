@@ -32,6 +32,8 @@ variable "db_password" {
   description = "Password for the RDS PostgreSQL instance"
   type        = string
   sensitive   = true
+  default     = "StrongPass123!@#"
+
 }
 
 variable "allowed_cidr_blocks" {
