@@ -9,7 +9,7 @@ env:
   TF_CLOUD_ORGANIZATION: "Fiap-arch"
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
   TF_WORKSPACE: "infra-db"
-  CONFIG_DIRECTORY: "./"
+  CONFIG_DIRECTORY: "./db-production-manager"
 
 
 jobs:
@@ -20,6 +20,9 @@ jobs:
     permissions: # granular permissions
       # so GitHub can check out this repo using the default github.token
       contents: read
+    strategy:
+      matrix:
+        project: ["db-production-manager", "db-techchallenge-prod"]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -29,7 +32,7 @@ jobs:
         id: apply-upload
         with:
           workspace: ${{ env.TF_WORKSPACE }}
-          directory: ${{ env.CONFIG_DIRECTORY }}
+          directory: "./${{ matrix.project }}"
 
       - name: Create Apply Run
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
